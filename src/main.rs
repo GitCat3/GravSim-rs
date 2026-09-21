@@ -17,6 +17,12 @@ fn test(query: Query<&Particle>) {
     }
 }
 
+fn change_pos(mut query: Query<&mut Particle>) {
+    for particle in query {
+        particle.x += 5.0;
+    }
+}
+
 fn main() {
     App::new()
     .add_plugins(DefaultPlugins)
