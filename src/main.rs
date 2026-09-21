@@ -1,12 +1,26 @@
 use bevy::prelude::*;
 
-fn hello() {
-    println!("hello world!")
+#[derive(Component)]
+struct Particle {
+    x: f64,
+    y: f64,
+}
+
+
+fn hello(mut commands: Commands) {
+    commands.spawn(Particle {x: 100.0, y: 100.0});
+}
+
+fn test(query: Query<&Particle>) {
+    for particle in query {
+        println!("{},{}", particle.x, particle.y)
+    }
 }
 
 fn main() {
     App::new()
     .add_plugins(DefaultPlugins)
-    .add_systems(Update, hello)
+    .add_systems(Startup, hello)
+    .add_systems(Update, test)
     .run();
 }
